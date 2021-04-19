@@ -15,7 +15,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = DB::table('categories')->get();
+        $categories = DB::table('categories')
+                    ->join('status', 'categories.status', '=', 'status.status_id')
+                    ->select('categories.*', 'status.status_type')
+                    ->get();
          
        return view('admin/category', compact('categories'));
     }
@@ -29,8 +32,9 @@ class CategoryController extends Controller
        DB::table('categories')->insert([
             'type'=>$request->type,
             'description' =>$request->description,
-            'status' =>$request->status,
-            'price' =>$request->price
+            'price' =>$request->price,
+            'status' =>1
+
        ]);
 
        return redirect('admin/category')->with('product_add','Product added successfully');
@@ -58,6 +62,15 @@ class CategoryController extends Controller
     {
         DB::table('categories')->where('id',$id)->delete();
         return redirect()->back()->with('product_delete','Product delete Successfully') ;
+    }
+
+    public function status($status,$id)
+    {
+        // echo "<pre>";
+        // echo $id;
+        // dd($status);
+        DB::table('categories')->where('id',$id)->update(['status' =>$status]);
+        return redirect()->back()->with('status_update','Status updated Successfully') ;
     }
 
 

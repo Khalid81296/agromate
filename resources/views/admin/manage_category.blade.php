@@ -22,10 +22,6 @@
 	                <label for="description" class=" form-control-label">Description</label>
 	                <input type="text" id="description" name="description" placeholder="Enter Description" class="form-control">
 	            </div>
-	            <div class="form-group">
-	                <label for="status" class=" form-control-label">Status</label>
-	                <input type="text" id="status" name="status" placeholder="Enter current status" class="form-control">
-	            </div>
 	            <div class="row form-group">
 	                <div class="col-8">
 	                    <div class="form-group">

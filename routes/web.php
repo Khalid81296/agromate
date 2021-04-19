@@ -31,6 +31,8 @@ Route::group(['middleware'=>'admin_auth'],function(){
 	Route::post('admin/manage_category',[CategoryController::class, 'saveProduct'])->name('save.product');
 	Route::get('admin/edit-category/{id}',[CategoryController::class, 'editProduct'])->name('product.edit');
 	Route::get('admin/delete-category/{id}',[CategoryController::class, 'deleteProduct'])->name('product.delete');
+	Route::get('admin/category/status/{status}/{id}',[CategoryController::class, 'status'])->name('status.update');
+	
 	Route::post('admin/update-category',[CategoryController::class, 'updateProduct'])->name('update.product');
 	Route::get('admin/coupon',[CouponController::class,'index']);
 	Route::get('admin/manage_coupon',[CouponController::class,'manage_coupon']);

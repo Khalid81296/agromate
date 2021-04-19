@@ -9,6 +9,9 @@
 @if(Session::has('product_update'))
 <div  class="alert alert-success" role="alert">{{Session::get('product_update')}}</div>
 @endif
+@if(Session::has('status_update'))
+<div  class="alert alert-success" role="alert">{{Session::get('status_update')}}</div>
+@endif
 @if(Session::has('product_delete'))
 <div  class="alert alert-danger" role="alert">{{Session::get('product_delete')}}</div>
 @endif
@@ -25,7 +28,7 @@
                 <table class="table table-borderless table-data3">
                     <thead>
                         <tr>
-                            <th>id</th>
+                            <th width="1">id</th>
                             <th>type</th>
                             <th>description</th>
                             <th>status</th>
@@ -39,14 +42,19 @@
 
                     <tbody>
                         <tr>
-                            <td>{{$key+1}}</td>
+                            <td width="1">{{$key+1}}</td>
                             <td>{{$category->type}}</td>
                             <td>{{$category->description}}</td>
-                            <td class="process">{{$category->status}}</td>
+                            <td>{{$category->status_type}}</td>
                             <td>{{$category->price}}</td>
-                            <td>
-                            	<div style="size: 15px;float: right; background-color:#d22929;margin: 1px;"><a href="{{url('admin/delete-category/'.$category->id)}}" style="color: white !important;">Delete</a></div>
-								<div style="size: 15px;float: right; background-color: #1919da;margin: 1px;"><a href="{{url('admin/edit-category/'.$category->id)}}"style="color: white !important;">Edit</a></div> 
+                            <td width="300">
+								<a href="{{url('admin/edit-category/'.$category->id)}}"style="color: white !important;"><button type="button" class="btn-sm btn btn-success">Edit</button></a>
+                                @if($category->status==1)
+                                <a href="{{url('admin/category/status/0/'.$category->id)}}"style="color: white !important;"><button type="button" class="btn-sm btn btn-danger">Unavailable</button></a>
+                                @elseif($category->status==0)
+                                <a href="{{url('admin/category/status/1/'.$category->id)}}"style="color: white !important;"><button type="button" class="btn-sm btn btn-success">Available</button></a>
+                                @endif
+                            	<a href="{{url('admin/delete-category/'.$category->id)}}" style="color: white !important;"><button type="button" class="btn-sm btn btn-danger"> Delete</button></a>
 							</td>
                             
                         </tr>
