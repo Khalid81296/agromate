@@ -50,9 +50,9 @@
                             <td width="300">
 								<a href="{{url('admin/edit-category/'.$category->id)}}"style="color: white !important;"><button type="button" class="btn-sm btn btn-success">Edit</button></a>
                                 @if($category->status==1)
-                                <a href="{{url('admin/category/status/0/'.$category->id)}}"style="color: white !important;"><button type="button" class="btn-sm btn btn-danger">Unavailable</button></a>
+                                <a href="{{url('admin/category/status/0/'.$category->id)}}"style="color: white !important;"><button type="button" class="btn-sm btn btn-warning">Unavailable</button></a>
                                 @elseif($category->status==0)
-                                <a href="{{url('admin/category/status/1/'.$category->id)}}"style="color: white !important;"><button type="button" class="btn-sm btn btn-success">Available</button></a>
+                                <a href="{{url('admin/category/status/1/'.$category->id)}}"style="color: white !important;"><button type="button" class="btn-sm btn btn-primary">Available</button></a>
                                 @endif
                             	<a href="{{url('admin/delete-category/'.$category->id)}}" style="color: white !important;"><button type="button" class="btn-sm btn btn-danger"> Delete</button></a>
 							</td>

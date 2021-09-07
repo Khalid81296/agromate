@@ -32,14 +32,15 @@ Route::group(['middleware'=>'admin_auth'],function(){
 	Route::get('admin/edit-category/{id}',[CategoryController::class, 'editProduct'])->name('product.edit');
 	Route::get('admin/delete-category/{id}',[CategoryController::class, 'deleteProduct'])->name('product.delete');
 	Route::get('admin/category/status/{status}/{id}',[CategoryController::class, 'status'])->name('status.update');
-	
 	Route::post('admin/update-category',[CategoryController::class, 'updateProduct'])->name('update.product');
 	Route::get('admin/coupon',[CouponController::class,'index']);
 	Route::get('admin/manage_coupon',[CouponController::class,'manage_coupon']);
 	Route::post('admin/manage_coupon',[CouponController::class, 'saveCoupon'])->name('save.coupon');
 	Route::get('admin/edit-coupon/{id}',[CouponController::class, 'editCoupon'])->name('coupon.edit');
 	Route::get('admin/delete-coupon/{id}',[CouponController::class, 'deleteCoupon'])->name('coupon.delete');
-	Route::post('admin/update-coupon',[couponController::class, 'updateCoupon'])->name('update.coupon');
+	Route::post('admin/update-coupon',[CouponController::class, 'updateCoupon'])->name('update.coupon');
+	
+	Route::get('admin/coupon/status/{status}/{id}',[CouponController::class, 'status'])->name('status.update');
 	
 	Route::get('admin/logout', function () 
 		{

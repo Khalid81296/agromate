@@ -9,6 +9,9 @@
 @if(Session::has('coupon_update'))
 <div  class="alert alert-success" role="alert">{{Session::get('coupon_update')}}</div>
 @endif
+@if(Session::has('status_update'))
+<div  class="alert alert-success" role="alert">{{Session::get('status_update')}}</div>
+@endif
 @if(Session::has('coupon_delete'))
 <div  class="alert alert-danger" role="alert">{{Session::get('coupon_delete')}}</div>
 @endif
@@ -29,6 +32,7 @@
                             <th>title</th>
                             <th>code</th>
                             <th>value</th>
+                            <th>status</th>
                             <th>action</th>
 
                             
@@ -42,9 +46,15 @@
                             <td>{{$coupon->title}}</td>
                             <td>{{$coupon->code}}</td>
                             <td>{{$coupon->value}}</td>
+                            <td>{{$coupon->status_name}}</td>
                             <td>
-                            	<div style="size: 15px;float: right; background-color:#d22929;margin: 1px;"><a href="{{url('admin/delete-coupon/'.$coupon->id)}}" style="color: white !important;">Delete</a></div>
-								<div style="size: 15px;float: right; background-color: #1919da;margin: 1px;"><a href="{{url('admin/edit-coupon/'.$coupon->id)}}"style="color: white !important;">Edit</a></div> 
+								<a href="{{url('admin/edit-coupon/'.$coupon->id)}}"style="color: white !important;"><button type="button" class="btn-sm btn btn-success">Edit</button></a>
+								@if($coupon->status==1)
+                                <a href="{{url('admin/coupon/status/0/'.$coupon->id)}}"style="color: white !important;"><button type="button" class="btn-sm btn btn-warning">Unactive</button></a>
+                                @elseif($coupon->status==0)
+                                <a href="{{url('admin/coupon/status/1/'.$coupon->id)}}"style="color: white !important;"><button type="button" class="btn-sm btn btn-primary">Active</button></a>
+                                @endif
+                            	<a href="{{url('admin/delete-coupon/'.$coupon->id)}}" style="color: white !important;"><button type="button" class="btn-sm btn btn-danger">Delete</button></a></div>
 							</td>
                             
                         </tr>

@@ -17,7 +17,10 @@ class CouponController extends Controller
      */
    public function index()
     {
-        $coupons = DB::table('coupons')->get();
+        $coupons = DB::table('coupons')
+                ->join('status', 'coupons.status', '=', 'status.status_id')
+                ->select('coupons.*', 'status.status_name')
+                ->get();
          
        return view('admin/coupon', compact('coupons'));
     }
@@ -39,7 +42,8 @@ class CouponController extends Controller
                DB::table('coupons')->insert([
                     'title'=>$request->title,
                     'code' =>$request->code,
-                    'value' =>$request->value
+                    'value' =>$request->value,
+                    'status' =>1
                ]);
 
                return redirect('admin/coupon')->with('coupon_add','Coupon added successfully');
@@ -67,6 +71,15 @@ class CouponController extends Controller
     {
         DB::table('coupons')->where('id',$id)->delete();
         return redirect()->back()->with('coupon_delete','Coupon delete Successfully') ;
+    }
+
+    public function status($status,$id)
+    {
+        // echo "<pre>";
+        // echo $id;
+        // dd($status);
+        DB::table('coupons')->where('id',$id)->update(['status' =>$status]);
+        return redirect()->back()->with('status_update','Status updated Successfully') ;
     }
 
     /**
