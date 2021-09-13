@@ -17,9 +17,9 @@ class CategoryController extends Controller
     {
         $categories = DB::table('categories')
                     ->join('status', 'categories.status', '=', 'status.status_id')
-                    ->select('categories.*', 'status.status_type')
+                    ->select('categories.*', 'status.status_name')
                     ->get();
-         
+         // dd($categories);
        return view('admin/category', compact('categories'));
     }
     public function manage_category()
@@ -29,10 +29,18 @@ class CategoryController extends Controller
 
     public function saveProduct(Request $request)
     {
+        // File upload
+        /*if($request->show_cause != NULL){
+            $fileName = $request->court.'_'.time().'.'.$request->show_cause->extension();
+            $request->show_cause->move(public_path('uploads/product_image/'), $fileName);
+        }else{
+            $fileName = NULL;
+        }*/
        DB::table('categories')->insert([
             'type'=>$request->type,
             'description' =>$request->description,
-            'price' =>$request->price,
+            // 'price' =>$request->price,
+            // 'product_image' =>$fileName,
             'status' =>1
 
        ]);
@@ -40,25 +48,33 @@ class CategoryController extends Controller
        return redirect('admin/category')->with('product_add','Product added successfully');
     }
 
-    public function editProduct($id)
+    public function editCategory($id)
     {
         $category = DB::table('categories')->where('id',$id)->first();
         return view('admin/edit_category',compact('category'));
     }
-    public function updateProduct(Request $request)
+    public function updateCategory(Request $request)
     {
         // print_r($request->id);exit('ali');
+         // File upload
+        /*if($request->show_cause != NULL){
+            $fileName = $request->court.'_'.time().'.'.$request->show_cause->extension();
+            $request->show_cause->move(public_path('uploads/product_image/'), $fileName);
+        }else{
+            $fileName = NULL;
+        }*/
         DB::table('categories')->where('id',$request->id)->update([
             'type'=>$request->type,
             'description' =>$request->description,
             'status' =>$request->status,
-            'price' =>$request->price
+            // 'product_image' =>$fileName,
+            // 'price' =>$request->price
         ]);
         return redirect('admin/category')->with('product_update','Product updated Successfully') ;
         
     }
 
-    public function deleteProduct($id)
+    public function deleteCategory($id)
     {
         DB::table('categories')->where('id',$id)->delete();
         return redirect()->back()->with('product_delete','Product delete Successfully') ;

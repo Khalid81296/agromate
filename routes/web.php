@@ -17,9 +17,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
-Route::get('admin',[AdminController::class,'index']);
+Route::get('admin',[AdminController::class,'index'])->name('admin');
 Route::post('admin/auth',[AdminController::class,'auth'])->name('admin.auth');
 
 // Route::get('admin/dashboard',[AdminController::class,'dashboard']);
@@ -28,11 +28,11 @@ Route::group(['middleware'=>'admin_auth'],function(){
 	Route::get('admin/dashboard',[AdminController::class,'dashboard']);
 	Route::get('admin/category',[CategoryController::class,'index']);
 	Route::get('admin/manage_category',[CategoryController::class,'manage_category']);
-	Route::post('admin/manage_category',[CategoryController::class, 'saveProduct'])->name('save.product');
-	Route::get('admin/edit-category/{id}',[CategoryController::class, 'editProduct'])->name('product.edit');
-	Route::get('admin/delete-category/{id}',[CategoryController::class, 'deleteProduct'])->name('product.delete');
+	Route::post('admin/manage_category',[CategoryController::class, 'saveCategory'])->name('save.category');
+	Route::get('admin/edit-category/{id}',[CategoryController::class, 'editCategory'])->name('category.edit');
+	Route::post('admin/update-category',[CategoryController::class, 'updateCategory'])->name('update.category');
+	Route::get('admin/delete-category/{id}',[CategoryController::class, 'deleteCategory'])->name('category.delete');
 	Route::get('admin/category/status/{status}/{id}',[CategoryController::class, 'status'])->name('status.update');
-	Route::post('admin/update-category',[CategoryController::class, 'updateProduct'])->name('update.product');
 	Route::get('admin/coupon',[CouponController::class,'index']);
 	Route::get('admin/manage_coupon',[CouponController::class,'manage_coupon']);
 	Route::post('admin/manage_coupon',[CouponController::class, 'saveCoupon'])->name('save.coupon');
@@ -46,7 +46,8 @@ Route::group(['middleware'=>'admin_auth'],function(){
 		{
 			session()->forget('ADMIN_LOGIN');
             session()->forget('ADMIN_ID');
-            return redirect('admin');
+            // return redirect('admin');
+            return redirect('/');
 		});
 });
 	

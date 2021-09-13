@@ -27,13 +27,12 @@
             <div class="table-responsive m-b-40">
                 <table class="table table-borderless table-data3">
                     <thead>
-                        <tr>
+                        <tr class="text-left">
                             <th width="1">id</th>
                             <th>type</th>
                             <th>description</th>
                             <th>status</th>
-                            <th>price</th>
-                            <th>action</th>
+                            <th width="300">action</th>
 
                             
                         </tr>
@@ -41,12 +40,11 @@
                  @foreach($categories as $key => $category)
 
                     <tbody>
-                        <tr>
+                        <tr class="text-left">
                             <td width="1">{{$key+1}}</td>
                             <td>{{$category->type}}</td>
                             <td>{{$category->description}}</td>
-                            <td>{{$category->status_type}}</td>
-                            <td>{{$category->price}}</td>
+                            <td>{{$category->status_name}}</td>
                             <td width="300">
 								<a href="{{url('admin/edit-category/'.$category->id)}}"style="color: white !important;"><button type="button" class="btn-sm btn btn-success">Edit</button></a>
                                 @if($category->status==1)
