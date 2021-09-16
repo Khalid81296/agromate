@@ -27,15 +27,20 @@
 </head>
 
 <body class="animsition">
+        @if ($message = Session::get('success'))
+            <div class="alert alert-success">
+                <p>{{ $message }}</p>
+            </div>
+        @endif
     <div class="page-wrapper">
         <div class="page-content--bge5">
             <div class="container">
                 <div class="login-wrap">
                     <div class="login-content">
-                            <div  style="text-align: center; font-size: 55px;font-family: chiller;font-weight: bolder;color: blue;">{{Config::get('constants.SITE_NAME')}}</div>
+                            <!-- <div  style="text-align: center; font-size: 50px;font-family: Segoe Script;font-weight: bolder;color: blue;">{{Config::get('constants.SITE_NAME')}}</div> -->
                         <div class="login-logo" style="font-size: 35px;">
                             <a href="#">
-                                <img src="{{asset('admin_assets/images/icon/mnm.jpg')}}" alt="CoolAdmin">
+                                <img src="{{asset('admin_assets/images/icon/mnm.jpg')}}" alt="MnM AgroMate">
                             </a>
                         </div>
                         <div class="login-form">
@@ -63,7 +68,12 @@
                                <span style="color: red"> {{session('error')}}  </span>
                                  
                             </form>
-                           
+                            <div class="register-link">
+                                <p>
+                                    Don't you have account?
+                                    <a href="{{route('registration')}}">Sign Up Here</a>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>

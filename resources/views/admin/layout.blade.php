@@ -146,6 +146,7 @@
         <!-- END HEADER MOBILE-->
 
         <!-- MENU SIDEBAR-->
+        
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a href="#">
@@ -164,6 +165,12 @@
                         <li class="@yield('category_select')">
                             <a href="{{ url('admin/category') }}">
                             <i class="fas fa-clipboard-list"></i>Category</a>
+                            
+                        </li>
+
+                        <li class="@yield('category_select')">
+                            <a href="{{ url('admin/subcategory') }}">
+                            <i class="fas fa-clipboard-list"></i>Sub Category</a>
                             
                         </li>
                          

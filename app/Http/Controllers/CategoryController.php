@@ -15,19 +15,21 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = DB::table('categories')
+        $data['categories'] = DB::table('categories')
                     ->join('status', 'categories.status', '=', 'status.status_id')
                     ->select('categories.*', 'status.status_name')
                     ->get();
+
+        $data['page_title'] = "Category List";          
          // dd($categories);
-       return view('admin/category', compact('categories'));
+       return view('admin/category')->with($data);
     }
     public function manage_category()
     {
        return view('admin/manage_category');
     }
 
-    public function saveProduct(Request $request)
+    public function saveCategory(Request $request)
     {
         // File upload
         /*if($request->show_cause != NULL){

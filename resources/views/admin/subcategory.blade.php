@@ -1,5 +1,5 @@
 @extends('admin/layout')
-@section('category_select','active')
+@section('subcategory_select','active')
 @section('container')
 <h1>{{ $page_title }}</h1><br>
 @if(Session::has('product_add'))
@@ -15,7 +15,7 @@
 <div  class="alert alert-danger" role="alert">{{Session::get('product_delete')}}</div>
 @endif
 
-    <a href="manage_category">
+    <a href="manage_subcategory">
         <button class="au-btn au-btn-icon au-btn--blue">
         <i class="zmdi zmdi-plus"></i>add item</button>
     </a>
@@ -28,30 +28,32 @@
                     <thead>
                         <tr class="text-left">
                             <th width="1">id</th>
-                            <th>type</th>
+                            <th>name</th>
                             <th>description</th>
+                            <th>price</th>
                             <th>status</th>
                             <th width="300">action</th>
 
                             
                         </tr>
                     </thead>
-                 @foreach($categories as $key => $category)
+                 @foreach($subcategories as $key => $subcategory)
 
                     <tbody>
                         <tr class="text-left">
                             <td width="1">{{$key+1}}</td>
-                            <td>{{$category->type}}</td>
-                            <td>{{$category->description}}</td>
-                            <td>{{$category->status_name}}</td>
+                            <td>{{$subcategory->product_name}}</td>
+                            <td>{{$subcategory->description}}</td>
+                            <td>{{$subcategory->price}}৳</td>
+                            <td>{{$subcategory->status_name}}</td>
                             <td width="300">
-								<a href="{{url('admin/edit-category/'.$category->id)}}"style="color: white !important;"><button type="button" class="btn-sm btn btn-success">Edit</button></a>
-                                @if($category->status==1)
-                                <a href="{{url('admin/category/status/0/'.$category->id)}}"style="color: white !important;"><button type="button" class="btn-sm btn btn-warning">Unavailable</button></a>
-                                @elseif($category->status==0)
-                                <a href="{{url('admin/category/status/1/'.$category->id)}}"style="color: white !important;"><button type="button" class="btn-sm btn btn-primary">Available</button></a>
+								<a href="{{url('admin/edit-subcategory/'.$subcategory->id)}}"style="color: white !important;"><button type="button" class="btn-sm btn btn-success">Edit</button></a>
+                                @if($subcategory->status==1)
+                                <a href="{{url('admin/subcategory/status/0/'.$subcategory->id)}}"style="color: white !important;"><button type="button" class="btn-sm btn btn-warning">Unavailable</button></a>
+                                @elseif($subcategory->status==0)
+                                <a href="{{url('admin/subcategory/status/1/'.$subcategory->id)}}"style="color: white !important;"><button type="button" class="btn-sm btn btn-primary">Available</button></a>
                                 @endif
-                            	<a href="{{url('admin/delete-category/'.$category->id)}}" style="color: white !important;"><button type="button" class="btn-sm btn btn-danger"> Delete</button></a>
+                            	<a href="{{url('admin/delete-subcategory/'.$subcategory->id)}}" style="color: white !important;"><button type="button" class="btn-sm btn btn-danger"> Delete</button></a>
 							</td>
                             
                         </tr>

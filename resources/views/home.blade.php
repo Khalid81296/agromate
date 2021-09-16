@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>MnM - Organic Food</title>
     <link href="https://fonts.googleapis.com/css?family=Cairo:400,600,700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <link href="https://fonts.googleapis.com/css?family=Poppins:600&amp;display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400i,700i" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu&amp;display=swap" rel="stylesheet">
@@ -56,7 +57,7 @@
                                 <option value="usd">£ GBP (Pound)</option>
                             </select>
                         </li>
-                        <li><a href="{{ route('admin') }}" class="login-link"><i class="biolife-icon icon-login"></i>My Account</a></li>
+                        <li><a href="{{ route('login') }}" class="login-link"><i class="biolife-icon icon-login"></i>My Account</a></li>
                     </ul>
                 </div>
             </div>
@@ -65,7 +66,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-3 col-md-2 col-md-6 col-xs-6">
-                        <a href="home-01.html" class="biolife-logo"><img src="assets/images/logo-biolife-1.png" alt="biolife logo" width="135" height="36"></a>
+                        <a href="home-01.html" class="biolife-logo"><img src="admin_assets/images/icon/logoMnm.png" alt="biolife logo" width="135" height="10" style="height: 60px !important;"></a>
+
                     </div>
                     <div class="col-lg-9 col-md-10 padding-top-2px">
                         <div class="header-search-bar layout-01 no-product-cat">
@@ -75,7 +77,7 @@
                             </form>
                         </div>
                         <div class="live-info">
-                            <p class="telephone"><i class="fa fa-phone" aria-hidden="true"></i><b class="phone-number">(+088) 01645678911</b></p>
+                            <p class="telephone"><i class="fa fa-phone" aria-hidden="true"></i><b class="phone-number">(+880) 01645678911</b></p>
                             <p class="working-time">Mon-Fri: 8:30am-7:30pm; Sat-Sun: 9:30am-4:30pm</p>
                         </div>
                     </div>
@@ -100,7 +102,7 @@
                             <div class="wrap-menu">
                                 <ul class="menu clone-main-menu">
                                     <li class="menu-item menu-item-has-children has-megamenu">
-                                        <a href="#" class="menu-name" data-title="Fruit & Nut Gifts"><i class="biolife-icon icon-fruits"></i>Oils</a>
+                                        <a href="#" class="menu-name" data-title="Fruit & Nut Gifts"><i class="fas fa-oil-can"></i> Cooking Oils</a>
                                         <div class="wrap-megamenu lg-width-900 md-width-640">
                                             <div class="mega-content">
                                                 <div class="row">
@@ -769,9 +771,9 @@
                         <div class="slide-contain slider-opt03__layout01 mode-03 black-color slide-bgr-mode03-01">
                             <div class="media"></div>
                             <div class="text-content">
-                                <i class="first-line">Pomegranate</i>
-                                <h3 class="second-line">Fresh Juice. 100% Organic</h3>
-                                <p class="third-line">A blend of freshly squeezed green apple & fruits</p>
+                                <i class="first-line">Mustard Oil</i>
+                                <h3 class="second-line">100% Organic</h3>
+                                <p class="third-line">A blend of freshly squeezed mustard seeds</p>
                                 <p class="buttons">
                                     <a href="#" class="btn btn-bold">Shop now</a>
                                     <a href="#" class="btn btn-thin">View lookbook</a>
