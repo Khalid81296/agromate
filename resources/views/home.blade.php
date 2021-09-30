@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400i,700i" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu&amp;display=swap" rel="stylesheet">
     <link rel="shortcut icon" type="image/x-icon" href="admin_assets/images/icon/favicon.ico" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/animate.min.css">
     <link rel="stylesheet" href="assets/css/font-awesome.min.css">
@@ -71,10 +72,19 @@
                     </div>
                     <div class="col-lg-9 col-md-10 padding-top-2px">
                         <div class="header-search-bar layout-01 no-product-cat">
-                            <form action="#" class="form-search" name="desktop-seacrh" method="get">
-                                <input type="text" name="s" class="input-text" value="" placeholder="Search here...">
-                                <button type="submit" class="btn-submit"><i class="biolife-icon icon-search"></i></button>
+                            <form action="javascript:void(0)" class="form-search" name="desktop-seacrh" method="get">
+                                @csrf
+                                <!-- <input type="text" name="s" class="input-text" value="" placeholder="Search here..."> -->
+                                <input type="text" class="form-controller input-text" id="search" name="search"placeholder="Search here..."></input>
+                                <button type="submit" class="btn-submit" ><i class="biolife-icon icon-search"></i></button>
+                                <div id="srch_result" style="display:none; ">
+                                    <!-- <table class="table table-borderless table-striped table-earning">
+                                    <tbody>
+                                    </tbody>
+                                    </table> -->
+                                </div>
                             </form>
+                                <!-- <a href="{{ route('admin.search') }}"><button type="submit" class="btn-submit"><i class="biolife-icon icon-search"></i></button></a> -->
                         </div>
                         <div class="live-info">
                             <p class="telephone"><i class="fa fa-phone" aria-hidden="true"></i><b class="phone-number">(+880) 01645678911</b></p>
@@ -3874,6 +3884,23 @@
     <!-- Scroll Top Button -->
     <a class="btn-scroll-top"><i class="biolife-icon icon-left-arrow"></i></a>
 
+    <script type="text/javascript">
+    $('#search').on('keyup',function(){
+        $value=$(this).val();
+        $.ajax({
+            type : 'get',
+            url : 'admin/searchResult',
+            data:{'search':$value},
+            success:function(data){
+                $('tbody').html(data);
+                if(data != '' || data != undefined){
+                    $('#srch_result').css('display','block');
+                    $('#srch_result').html(data);
+                }
+            }
+        });
+    })
+    </script>
     <script src="assets/js/jquery-3.4.1.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/jquery.countdown.min.js"></script>

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\CouponController;
 use Illuminate\Support\Facades\Route;
@@ -26,12 +27,12 @@ Route::get('login',[AdminController::class,'index'])->name('login');
 Route::get('registration',[UsersController::class,'index'])->name('registration');
 Route::post('user/registration',[UsersController::class,'register'])->name('user.registration');
 Route::post('admin/auth',[AdminController::class,'auth'])->name('admin.auth');
-
+Route::get('admin/search',[SearchController::class,'index'])->name('admin.search');
+Route::get('admin/searchResult',[SearchController::class,'search'])->name('search.result');
 // Route::get('admin/dashboard',[AdminController::class,'dashboard']);
 
 Route::group(['middleware'=>'admin_auth'],function(){
 	Route::get('admin/dashboard',[AdminController::class,'dashboard'])->name('admin.dashboard');
-	Route::get('user/dashboard',[UsersController::class,'dashboard'])->name('user.dashboard');
 	Route::get('admin/category',[CategoryController::class,'index']);
 	Route::get('admin/manage_category',[CategoryController::class,'manage_category']);
 	Route::post('admin/manage_category',[CategoryController::class, 'saveCategory'])->name('save.category');
@@ -40,6 +41,7 @@ Route::group(['middleware'=>'admin_auth'],function(){
 	Route::get('admin/delete-category/{id}',[CategoryController::class, 'deleteCategory'])->name('category.delete');
 	Route::get('admin/category/status/{status}/{id}',[CategoryController::class, 'status'])->name('status.update');
 	Route::get('admin/subcategory',[SubCategoryController::class,'index']);
+	
 	Route::get('admin/manage_subcategory',[SubCategoryController::class,'manage_subcategory']);
 	Route::post('admin/manage_subcategory',[SubCategoryController::class, 'saveSubCategory'])->name('save.subcategory');
 	Route::get('admin/edit-subcategory/{id}',[SubCategoryController::class, 'editSubCategory'])->name('subcategory.edit');
@@ -54,11 +56,18 @@ Route::group(['middleware'=>'admin_auth'],function(){
 	Route::post('admin/update-coupon',[CouponController::class, 'updateCoupon'])->name('update.coupon');
 	
 	Route::get('admin/coupon/status/{status}/{id}',[CouponController::class, 'status'])->name('status.update');
+	Route::get('user/dashboard',[UsersController::class,'dashboard'])->name('user.dashboard');
+	Route::get('user/show/{id}',[UsersController::class,'show'])->name('user.show');
+	Route::get('user/address_details/{id}',[UsersController::class,'address_details'])->name('user.address_details');
+	Route::get('user/creat_address',[UsersController::class,'creat_address'])->name('user.creat_address');
+	Route::post('user/save_address',[UsersController::class,'save_address'])->name('user.save_address');
+	Route::post('user/profile_image',[UsersController::class,'profile_image'])->name('user.profile_image');
 	
 	Route::get('admin/logout', function () 
 		{
-			session()->forget('ADMIN_LOGIN');
-            session()->forget('ADMIN_ID');
+			Auth::logout();
+			// session()->forget('ADMIN_LOGIN');
+   //          session()->forget('ADMIN_ID');
             // return redirect('admin');
             return redirect('/');
 		});

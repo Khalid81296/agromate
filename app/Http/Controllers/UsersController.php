@@ -61,8 +61,12 @@ class UsersController extends Controller
 
 
 
-    public function dashboard()
+    public function dashboard(Request $request)
     {
+        // if($request->session()->has('ADMIN_ID')){
+        //  return $request->session()->get('ADMIN_ID');
+        // }
+        // return Auth::user()->id;
         // $roleID = Auth::user()->role_id;
         // dd($roleID);
        
@@ -93,15 +97,82 @@ class UsersController extends Controller
         //
     }
 
+
     /**
      * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    // public function show()
     public function show($id)
     {
         //
+        $data['info'] = DB::table('users')
+                        ->select('fname','lname','username','email','mobile_no')
+                        ->where('id',$id)
+                        ->first();
+        // dd($data);                
+        $data['page_title'] = "Basic Information";
+        return view('users.basic_info')->with($data);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */ // public function show($id)
+    public function creat_address()
+    {
+        //
+    
+        $data['page_title'] = "Add Shippng & Billing Address";
+        return view('users.creat_address')->with($data);
+    }
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function save_address(Request $request)
+    {
+        //
+        $id = Auth::user()->id;
+        DB::table('users')->insert([
+            'shipping_address' =>$request->shipping_address,
+            'billing_address' =>$request->billing_address,
+        ])->where('id',$id);
+    }
+/**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function profile_image(Request $request)
+    {
+        //
+        $id = Auth::user()->id;
+        DB::table('users')->insert([
+            'shipping_address' =>$request->shipping_address,
+            'billing_address' =>$request->billing_address,
+        ])->where('id',$id);
+    }
+
+    /** * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */ // public function show($id)
+    public function address_details($id)
+    {
+        //
+        $data['address'] = DB::table('users')
+                        ->select('shipping_address','billing_address')
+                        ->where('id',$id)
+                        ->first();
+        $data['page_title'] = "Address Details";
+        return view('users.address_details')->with($data);
     }
 
     /**

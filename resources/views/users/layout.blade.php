@@ -156,29 +156,71 @@
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
+                       <li class="@yield('category_select')">
+                            @php
+                                //dd(\Auth::user()->id);
+                            @endphp
+                            @if(Auth::user()->profile_image != NULL)
+                            <form action="{{ route('user.profile_image', Auth::user()->id) }}" method="POST" enctype="multipart/form-data">
+                               <div class="col-lg-6 mb-5">
+                                   <div class="form-group">
+                                       <div class="custom-file">
+                                           <input type="file" name="pro_pic" class="custom-file-input" id="customFile" />
+                                           <label class="custom-file" for="customFile">*</label>
+                                       </div>
+                                   </div>
+                               </div>                                
+                            
+                                <div>
+                                    <a href="{{ route('user.profile_image', Auth::user()->id) }}">
+                                        <img src="{{asset('admin_assets/images/icon/')}}/{{ Auth::user()->profile_image }}" alt="Profile Pic" />
+                                    </a>
+                                </div> 
+                            </form>
+                            @else
+                            <div>
+                                <form action="{{ route('user.profile_image', Auth::user()->id) }}" method="POST" enctype="multipart/form-data">
+                                    <div>
+                                        <a href="#">
+                                            <div class="custom-file">
+                                                <input type="file" name="pro_pic" class="custom-file-input" id="customFile" />
+                                            </div>
+                                            <img src="{{asset('admin_assets/images/icon/')}}/{{ Auth::user()->profile_image }}" alt="Profile Pic" />
+                                        </a>
+                                    </div> 
+                                </form>
+                                <a href="#">
+                                    <img src="{{asset('admin_assets/images/icon/default.jpg')}}" alt="Profile Pic" />
+                                </a>
+                            </div>
+                            @endif
+                        </li>
+                        @php
+                        $id = (Auth::user()->id);
+                        @endphp
                         <li class="@yield('dashboard_select')">
-                            <a href="{{ url('admin/dashboard') }}">
-                            <i class="fas fa-tachometer-alt"></i>Dashboard</a>
+                            <!-- <a href="{{ url('admin/dashboard') }}"> -->
+                            <a href="{{ route('user.show', $id) }}"><i class="fas fa-tachometer-alt"></i>Basic Information</a><!-- </a> -->
                             
                         </li>
                         
                         <li class="@yield('category_select')">
-                            <a href="{{ url('admin/category') }}">
-                            <i class="fas fa-clipboard-list"></i>Category</a>
+                            <!-- <a href="{{ url('admin/category') }}"> -->
+                            <a href="{{ route('user.address_details',$id) }}"><i class="fas fa-clipboard-list"></i>Address</a><!-- </a> -->
                             
                         </li>
 
                         <li class="@yield('category_select')">
-                            <a href="{{ url('admin/subcategory') }}">
-                            <i class="fas fa-clipboard-list"></i>Sub Category</a>
+                            <!-- <a href="{{ url('admin/subcategory') }}"> -->
+                            <a href=""><i class="fas fa-clipboard-list"></i>Orders</a> <!-- </a> -->
                             
                         </li>
                          
-                        <li class="@yield('coupon_select')">
+                        <!-- <li class="@yield('coupon_select')">
                             <a href="{{ url('admin/coupon') }}">
                             <i class="fas fa-tag"></i>Coupon</a>
                             
-                        </li>
+                        </li> -->
                     </ul>
                 </nav>
             </div>
@@ -201,6 +243,7 @@
                                     <div class="account-item clearfix js-item-menu">
                                        
                                         <div class="content">
+
                                             <a class="js-acc-btn" href="#">{{ Auth::user()->username }}</a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
