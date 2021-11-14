@@ -1,4 +1,5 @@
 @extends('users/layout')
+@section('page_titel',$page_title)
 @section('dashboard_select','active')
 @section('container')
 <!-- <h1>DashBoard</h1> -->

@@ -13,6 +13,7 @@
     <title>@yield('page_titel')</title>
 
     <!-- Fontfaces CSS-->
+    <link rel="shortcut icon" type="image/x-icon" href="admin_assets/images/icon/favicon.ico" />
     <link href="{{asset('admin_assets/css/font-face.css')}}" rel="stylesheet" media="all">
     <link href="{{asset('admin_assets/vendor/font-awesome-4.7/css/font-awesome.min.css')}}" rel="stylesheet" media="all">
     <link href="{{asset('admin_assets/vendor/font-awesome-5/css/fontawesome-all.min.css')}}" rel="stylesheet" media="all">

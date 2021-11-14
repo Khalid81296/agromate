@@ -13,6 +13,7 @@
     <title>@yield('page_titel')</title>
 
     <!-- Fontfaces CSS-->
+    <link rel="shortcut icon" type="image/x-icon" href="admin_assets/images/icon/favicon.ico" />
     <link href="{{asset('admin_assets/css/font-face.css')}}" rel="stylesheet" media="all">
     <link href="{{asset('admin_assets/vendor/font-awesome-4.7/css/font-awesome.min.css')}}" rel="stylesheet" media="all">
     <link href="{{asset('admin_assets/vendor/font-awesome-5/css/fontawesome-all.min.css')}}" rel="stylesheet" media="all">
@@ -25,6 +26,47 @@
     <link href="{{asset('admin_assets/css/theme.css')}}" rel="stylesheet" media="all">
 
 </head>
+<style>
+    .container_cus {
+    position: relative;
+    width: 100%;
+    }
+
+    .image_cus {
+    display: block;
+    width: 100%;
+    height: auto;
+    }
+
+    .overlay_cus {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: #dde9ed;
+    }
+
+    .container_cus:hover .overlay_cus {
+    opacity: 0.5;
+    }
+
+    .text_cus {
+    color: black;
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+    }
+</style>
 
 <body>
        <div class="page-wrapper">
@@ -156,61 +198,61 @@
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
-                       <li class="@yield('category_select')">
+                       <li class="@yield('image_select')">
                             @php
                                 //dd(\Auth::user()->id);
                             @endphp
                             @if(Auth::user()->profile_image != NULL)
-                            <form action="{{ route('user.profile_image', Auth::user()->id) }}" method="POST" enctype="multipart/form-data">
-                               <div class="col-lg-6 mb-5">
-                                   <div class="form-group">
-                                       <div class="custom-file">
-                                           <input type="file" name="pro_pic" class="custom-file-input" id="customFile" />
-                                           <label class="custom-file" for="customFile">*</label>
-                                       </div>
-                                   </div>
-                               </div>                                
-                            
-                                <div>
-                                    <a href="{{ route('user.profile_image', Auth::user()->id) }}">
-                                        <img src="{{asset('admin_assets/images/icon/')}}/{{ Auth::user()->profile_image }}" alt="Profile Pic" />
-                                    </a>
-                                </div> 
-                            </form>
+                               <div class="container_cus">
+                                   <img class="image_cus" src="{{asset('admin_assets/images/icon/')}}/{{ Auth::user()->profile_image }}" alt="Profile Pic" />
+                                   <div class="overlay_cus">
+                                        <div class="text_cus" data-toggle="modal" data-target="#exampleModalCenter">
+                                            <i class="fas fa-edit">upload</i>
+                                        </div>
+                                    </div>
+                               </div>
+                            <a href="#"><i ></i></a><!-- </a> -->
+
                             @else
-                            <div>
-                                <form action="{{ route('user.profile_image', Auth::user()->id) }}" method="POST" enctype="multipart/form-data">
-                                    <div>
-                                        <a href="#">
-                                            <div class="custom-file">
-                                                <input type="file" name="pro_pic" class="custom-file-input" id="customFile" />
-                                            </div>
-                                            <img src="{{asset('admin_assets/images/icon/')}}/{{ Auth::user()->profile_image }}" alt="Profile Pic" />
-                                        </a>
-                                    </div> 
-                                </form>
-                                <a href="#">
-                                    <img src="{{asset('admin_assets/images/icon/default.jpg')}}" alt="Profile Pic" />
-                                </a>
-                            </div>
+                                <div>
+                                    <label  data-toggle="modal" data-target="#exampleModalCenter" class="custom-file" for="customFile"> <img src="{{asset('admin_assets/images/icon/')}}/{{ Auth::user()->profile_image }}" alt="Profile Pic" /></label>
+                                </div>
+                            <a href="#"><i></i></a><!-- </a> -->
+
                             @endif
                         </li>
                         @php
                         $id = (Auth::user()->id);
                         @endphp
-                        <li class="@yield('dashboard_select')">
+                        <!-- <li class="@yield('basic_select')">
+                            
+                                <div class="col-lg-12 mb-5">
+                                    <div class="container_cus">
+                                      <img src="http://localhost/agromate/public/admin_assets/images/icon/1635917054.jpg" alt="Example" class="image_cus">
+                                      <div class="overlay_cus">
+                                        <div class="text_cus" data-toggle="modal" data-target="#exampleModalCenter">
+                                            <i class="fas fa-edit"></i>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </div> -->
+                            <!-- <a href="{{ url('admin/dashboard') }}"> -->
+                            <!-- <a href=""></a> --><!-- </a> -->
+                            
+                        <!-- </li> -->
+                        <li class="@yield('basic_select')">
                             <!-- <a href="{{ url('admin/dashboard') }}"> -->
                             <a href="{{ route('user.show', $id) }}"><i class="fas fa-tachometer-alt"></i>Basic Information</a><!-- </a> -->
                             
                         </li>
                         
-                        <li class="@yield('category_select')">
+                        <li class="@yield('address_select')">
                             <!-- <a href="{{ url('admin/category') }}"> -->
                             <a href="{{ route('user.address_details',$id) }}"><i class="fas fa-clipboard-list"></i>Address</a><!-- </a> -->
                             
                         </li>
 
-                        <li class="@yield('category_select')">
+                        <li class="@yield('order_select')">
                             <!-- <a href="{{ url('admin/subcategory') }}"> -->
                             <a href=""><i class="fas fa-clipboard-list"></i>Orders</a> <!-- </a> -->
                             
@@ -280,6 +322,32 @@
         <!-- END PAGE CONTAINER-->
 
     </div>
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Chane Profile Image</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+                <form method="post" action="{{route('user.profile_image')}}" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-body">
+                      <div class="form-group">
+                        <label for="exampleFormControlFile1">Select Profile Image</label>
+                        <input type="file" class="form-control-file" id="profile_image" name="profile_image">
+                      </div>
+                   
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button class="btn btn-primary">Save changes</button>
+                    </div> 
+                </form>
+            </div>
+          </div>
+        </div>
 
     <!-- Jquery JS-->
     <script src="{{asset('admin_assets/vendor/jquery-3.2.1.min.js')}}"></script>

@@ -155,10 +155,15 @@ class UsersController extends Controller
     {
         //
         $id = Auth::user()->id;
-        DB::table('users')->insert([
-            'shipping_address' =>$request->shipping_address,
-            'billing_address' =>$request->billing_address,
-        ])->where('id',$id);
+        $fileName = time().'.'.$request->profile_image->extension();
+        $request->profile_image->move(public_path('admin_assets/images/icon/'), $fileName);
+        // return $fileName;
+        DB::table('users')->where('id',$id)->update([
+            'profile_image' =>$fileName,
+            // 'billing_address' =>$request->billing_address,
+        ]);
+
+        return redirect('user/dashboard')->with('product_update','Product updated Successfully') ;
     }
 
     /** * @param  int  $id

@@ -1,7 +1,8 @@
 @extends('users/layout')
+@section('page_titel',$page_title)
 @section('dashboard_select','active')
 @section('container')
-<!-- <h1>DashBoard</h1> -->
+<!-- <title>Address Details</title> -->
 
 <div class="card card-custom col-10">
    <div class="card-header flex-wrap py-5">
